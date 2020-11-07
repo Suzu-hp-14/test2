@@ -1,0 +1,41 @@
+<div class ="inputform">
+<%= form_with model: @user do |f|  %>
+<div class="form-group">
+  <%= f.label :name %>
+  <%= f.text_field :name , class: 'form-control w-50' %>
+</div>
+<div class="form-group">
+  <%= f.label :mailaddress %>
+  <%= f.text_field :mailaddress , class: 'form-control w-75'%>
+</div>
+<div class="form-group">
+  <%= f.label :birthday %>
+  <p><%= f.date_select :birthday , class: 'form-control' , use_month_numbers: true , start_year: 1930 , end_year: 2025 %></p>
+</div>
+<p><%= f.submit '登録' , class: 'btn btn-primary' %></p>
+<% end %>
+</div>
+</div>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>MailAddress</th>
+      <th>Birthday</th>
+      <th></th>
+    </tr>
+  </thead>
+<% @users.order(id: :desc).each do |user| %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= user.id %></th>
+        <td><%= user.name %></td>
+        <td><%= user.mailaddress %></td>
+        <td><%= user.birthday %></td>
+        <td><%= link_to "削除" ,user_path(user) , method: :DELETE, class: 'btn btn-danger' %></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
