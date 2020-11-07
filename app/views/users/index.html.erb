@@ -2,10 +2,16 @@
 <%= form_with model: @user do |f|  %>
 <div class="form-group">
   <%= f.label :name %>
+    <% if @user.errors.messages[:name].any? %>
+    <%= @user.errors.messages[:name][0] %>
+    <% end %>
   <%= f.text_field :name , class: 'form-control w-50' %>
 </div>
 <div class="form-group">
   <%= f.label :mailaddress %>
+    <% if @user.errors.messages[:mailaddress].any? %>
+    <%= @user.errors.messages[:mailaddress][0] %>
+    <% end %>
   <%= f.text_field :mailaddress , class: 'form-control w-75'%>
 </div>
 <div class="form-group">
@@ -27,7 +33,7 @@
       <th></th>
     </tr>
   </thead>
-<% @users.order(id: :desc).each do |user| %>
+<% @users.order(id: 'DESC').each do |user| %>
   <tbody>
     <tr>
       <th scope="row"><%= user.id %></th>
