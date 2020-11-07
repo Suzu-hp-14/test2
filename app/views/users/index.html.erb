@@ -1,6 +1,7 @@
 <div class ="inputform">
 <%= form_with model: @user do |f|  %>
 <div class="form-group">
+  <%= @user.errors.inspect %>
   <%= f.label :name %>
     <% if @user.errors.messages[:name].any? %>
     <%= @user.errors.messages[:name][0] %>
