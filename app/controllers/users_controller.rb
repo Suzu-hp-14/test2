@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
+    before_action :set_users, only: [:index, :create]
     
     def index
-        @users = User.all.order(id: "desc")
         @user = User.new
     end
     
@@ -10,7 +10,6 @@ class UsersController < ApplicationController
         if @user.save
             redirect_to users_path
         else
-            @users = User.all.order(id: "desc")
             render 'index'
         end
     end
@@ -27,6 +26,11 @@ class UsersController < ApplicationController
     private
     def user_params
         params.require(:user).permit(:name,:mailaddress,:birthday)
+    end
+    
+    private
+    def set_users
+        @users = User.all.order(id: "desc")
     end
     
 end
