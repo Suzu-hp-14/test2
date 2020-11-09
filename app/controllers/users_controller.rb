@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     
     def index
-        @users = User.all
+        @users = User.all.order(id: "desc")
         @user = User.new
     end
     
@@ -10,14 +10,14 @@ class UsersController < ApplicationController
         if @user.save
             redirect_to users_path
         else
+            @users = User.all.order(id: "desc")
             render 'index'
         end
-        
     end
     
     def destroy
         @user = User.find(params[:id])
-        @user.destroy
+        @user.destroy 
         redirect_to users_path
     end
     
